@@ -19,7 +19,6 @@ install:
 before_script:
   - chmod u+x build.sh
   - chmod u+x ./scripts/set-build-version.sh
-  - chmod u+x ./scripts/docker-build-push.sh
   - eval $(./scripts/set-build-version.sh)
   - export PATH=$PATH:$HOME/.local/bin
   - mono --version
