@@ -27,6 +27,16 @@ namespace BonVoyage
             return new FoursquareContext(_handler, accessToken);
         }
 
+        public FoursquareUserlessContext CreateUserlessFoursquareContext(UserlessAccessSettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            return new FoursquareUserlessContext(_handler, settings);
+        }
+
         public void Dispose()
         {
             _handler?.Dispose();
