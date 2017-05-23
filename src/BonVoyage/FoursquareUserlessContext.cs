@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using BonVoyage.Clients;
 using BonVoyage.Infrastructure;
 
 namespace BonVoyage
@@ -24,7 +25,11 @@ namespace BonVoyage
             {
                 BaseAddress = new Uri(Constants.FoursquareApiBaseUrl)
             };
+
+            Categories = new CategoryClient(_httpClient);
         }
+
+        public CategoryClient Categories { get; }
 
         public void Dispose()
         {
