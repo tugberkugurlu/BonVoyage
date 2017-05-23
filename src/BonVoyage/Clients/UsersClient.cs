@@ -13,12 +13,7 @@ namespace BonVoyage.Clients
 
         public UsersClient(HttpClient httpClient)
         {
-            if (httpClient == null)
-            {
-                throw new ArgumentNullException(nameof(httpClient));
-            }
-
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         /// <remarks>
@@ -26,12 +21,14 @@ namespace BonVoyage.Clients
         /// </remarks>
         public async Task<FoursquareUser> Get()
         {
-            var response = await _httpClient.GetAsync("v2/users/self").ConfigureAwait(false);
-            var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-            var user = JsonConvert.DeserializeObject<FoursquareUser>(jObject["response"]["user"].ToString());
+            using (var response = await _httpClient.GetAsync("v2/users/self").ConfigureAwait(false))
+            {
+                var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
+                var user = JsonConvert.DeserializeObject<FoursquareUser>(jObject["response"]["user"].ToString());
 
-            return user;
+                return user;
+            }
         }
     }
 }
