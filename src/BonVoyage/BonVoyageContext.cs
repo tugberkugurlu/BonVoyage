@@ -40,7 +40,7 @@ namespace BonVoyage
             return HttpClientFactory.CreatePipeline(new HttpClientHandler(), new DelegatingHandler[]
             {
                 new OAuthTokenSwitchHandler(),
-                new QueryAppenderHandler("v", "20151111")
+                new QueryAppenderHandler("v", "20170523")
             });
         }
     }
