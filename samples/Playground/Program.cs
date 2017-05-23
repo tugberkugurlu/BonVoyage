@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using BonVoyage;
+using BonVoyage.Models;
 
 namespace Playground
 {
@@ -18,9 +22,18 @@ namespace Playground
             {
                 var categories = foursquareContext.Categories.Get().Result;
 
+                PrintCategory(categories);
+            }
+        }
+
+        private static void PrintCategory(IReadOnlyCollection<VenueCategory> categories)
+        {
+            if (categories.Any())
+            {
                 foreach (var venueCategory in categories)
                 {
                     Console.WriteLine("{0}: {1}", venueCategory.Id, venueCategory.Name);
+                    PrintCategory(new ReadOnlyCollection<VenueCategory>(venueCategory.Categories.ToList()));
                 }
             }
         }
