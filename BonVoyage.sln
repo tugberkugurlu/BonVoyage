@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonVoyage", "src\BonVoyage\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonVoyage.Tests", "tests\BonVoyage.Tests\BonVoyage.Tests.csproj", "{BB9A1077-9025-44ED-9343-38042D933347}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D71A495F-B567-490C-8883-730BE24FA186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "samples\Playground\Playground.csproj", "{82D57799-987D-4B40-AE8B-727E0C332D38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{BB9A1077-9025-44ED-9343-38042D933347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB9A1077-9025-44ED-9343-38042D933347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB9A1077-9025-44ED-9343-38042D933347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82D57799-987D-4B40-AE8B-727E0C332D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D57799-987D-4B40-AE8B-727E0C332D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D57799-987D-4B40-AE8B-727E0C332D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D57799-987D-4B40-AE8B-727E0C332D38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82D57799-987D-4B40-AE8B-727E0C332D38} = {D71A495F-B567-490C-8883-730BE24FA186}
 	EndGlobalSection
 EndGlobal
