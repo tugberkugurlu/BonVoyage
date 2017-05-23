@@ -8,6 +8,7 @@ namespace BonVoyage
     {
         private readonly HttpClient _httpClient;
 
+        /// <seealso href="https://developer.foursquare.com/overview/auth#userless" />
         public FoursquareUserlessContext(HttpMessageHandler handler, UserlessAccessSettings settings)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
