@@ -23,7 +23,7 @@ namespace BonVoyage
 
             _httpClient = new HttpClient(handler, false)
             {
-                BaseAddress = new Uri("https://api.foursquare.com")
+                BaseAddress = new Uri(Constants.FoursquareApiBaseUrl)
             };
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
