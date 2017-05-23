@@ -38,7 +38,27 @@ then
 fi
 
 scriptsDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+testProjectRootDirectories=(${scriptsDir%%/}/tests/*/)
 
 dotnet restore $scriptsDir || exit 1
 dotnet clean $scriptsDir --configuration $CONFIGURATION --verbosity normal || exit 1
 dotnet build $scriptsDir --configuration $CONFIGURATION --verbosity normal --version-suffix '' /property:VersionPrefix=$BUILDVERSION || exit 1
+
+for projectDirectory in "${testProjectRootDirectories[@]}"
+do
+    projectFilePath="${projectDirectory%%/}/*.csproj"
+    numberOfCsprojFiles="${#projectFilePath[@]}"
+    if [ $numberOfCsprojFiles -eq "1" ]
+    then
+        if cat $projectFilePath | grep 'DotNetCliToolReference' | grep 'xunit' &>/dev/null
+        then
+            testDirectoryName=$(dirname "${projectFilePath}")
+            echo "starting to test $testDirectoryName for configration $CONFIGURATION"
+            (cd $testDirectoryName && dotnet xunit -configuration $CONFIGURATION) || exit 1
+        else
+            echo "$projectFilePath is not testable, skipping"
+        fi
+    else
+        echo "There are $numberOfCsprojFiles csproj file(s) for $projectFilePath, skipping testing that"
+    fi
+done
