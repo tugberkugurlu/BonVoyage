@@ -9,5 +9,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure" />
   </ItemGroup>
 </Project>
