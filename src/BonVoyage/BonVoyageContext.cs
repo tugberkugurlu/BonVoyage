@@ -32,6 +32,9 @@ namespace BonVoyage
             _handler?.Dispose();
         }
 
+        /// <remarks>
+        /// <seealso href="https://developer.foursquare.com/overview/versioning" /> for versioning.
+        /// </remarks>>
         private static HttpMessageHandler CreateHandler()
         {
             return HttpClientFactory.CreatePipeline(new HttpClientHandler(), new DelegatingHandler[]
