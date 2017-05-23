@@ -14,12 +14,7 @@ namespace BonVoyage
 
         public BonVoyageContext(HttpMessageHandler handler)
         {
-            if (handler == null)
-            {
-                throw new ArgumentNullException(nameof(handler));
-            }
-
-            _handler = handler;
+            _handler = handler ?? throw new ArgumentNullException(nameof(handler));
         }
 
         public FoursquareContext CreateFoursquareContext(string accessToken)
