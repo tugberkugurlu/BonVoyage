@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BonVoyage.Models;
 using Newtonsoft.Json;
@@ -7,13 +6,10 @@ using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
 {
-    public class UsersClient
+    public class UsersClient : BaseClient
     {
-        private readonly HttpClient _httpClient;
-
-        public UsersClient(HttpClient httpClient)
+        public UsersClient(HttpClient httpClient) : base(httpClient)
         {
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         /// <remarks>
@@ -21,7 +17,7 @@ namespace BonVoyage.Clients
         /// </remarks>
         public async Task<FoursquareUser> Get()
         {
-            using (var response = await _httpClient.GetAsync("v2/users/self").ConfigureAwait(false))
+            using (var response = await HttpClient.GetAsync("v2/users/self").ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
