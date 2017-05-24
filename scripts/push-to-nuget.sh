@@ -40,4 +40,4 @@ then
 fi
 
 echo "pushing $packagePath to NuGet.org..."
-dotnet nuget push $PACKAGEPATH --api-key $APIKEY --force-english-output || exit 1
+dotnet nuget push $PACKAGEPATH --api-key $APIKEY --source https://www.nuget.org/api/v2/package --force-english-output || exit 1
