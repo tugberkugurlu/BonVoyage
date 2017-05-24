@@ -6,27 +6,28 @@ env:
   global:
   - COMMIT=${TRAVIS_COMMIT::8}
   - ARTIFACTS_PATHS=./artifacts
+  - secure: sV28wH6zf2iaFxwoOsN4JUz4Zwro9hpMLlZTGE3u511TMBQ7AwTtSOgyGUubFfdnCLSwYpO4dIJyLiuW8CnHvJ53iTbYLuJr4BK8l944eTFCSY/3Wk+2IurDBKbjZYZhDm65u1JfRlOQaE75YCD3LFSOLI0E3d7bpXMIIy0VapAcL2vC0PNfKcN5pwe9osPPG0aIGmg+/XqpKjYIQPz7P0EeWRybRKybYz9fKLLdb0tkROoTmqH2znzuN2E7rOOzyGRsRbi3XMlizV6Hi7AGNlH93DvkR317En/ViQIWvbvnQmwNKnyteVDUG/Mr91c/fgPVTm7Vyl0sMhLyrux/SoyNTrcQv+5xltlvpRCp+2uSL7dtxFqUS6Er7WWwX4czpgPGGgcW35LvZqCR/kh2ZX8rsrnQUUgCFIXimap3JtOy9gdvvuATzcynwlyOr10cVCrIdIe2gsVgTo/J1LQJlwTz70JMeyvh2/46hvKVu3E74o80kRLAA0lwoOnPLo2k89p8sOQdqwrouawrYoJ9B6OLAnC53zbf57AuMQUHx5C02HZSqXxTl840LwuoeyA66CtbMckt2T1Rk+N8eP5UhfLKJXdxo049w+Zb4gXTMFEJ+3KkvuXTy6LQvSn6hkxDm/8CRs5AlKJxsutrVcE8SHtb3T0y8qht9LMIvoRneNY=
 
 install:
-  - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
-  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
-  - sudo apt-get update
-  - sudo apt-get install -y --no-install-recommends dotnet-dev-1.0.1
-  - curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-  - sudo apt-get install -y nodejs
-  - sudo npm install semver -g
- 
+- sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+- sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+- sudo apt-get update
+- sudo apt-get install -y --no-install-recommends dotnet-dev-1.0.1
+- curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+- sudo apt-get install -y nodejs
+- sudo npm install semver -g
+
 before_script:
-  - chmod u+x build.sh
-  - chmod u+x ./scripts/set-build-version.sh
-  - chmod u+x ./scripts/push-to-nuget.sh
-  - eval $(./scripts/set-build-version.sh)
-  - export PATH=$PATH:$HOME/.local/bin
-  - mono --version
-  - dotnet --info
-  
+- chmod u+x build.sh
+- chmod u+x ./scripts/set-build-version.sh
+- chmod u+x ./scripts/push-to-nuget.sh
+- eval $(./scripts/set-build-version.sh)
+- export PATH=$PATH:$HOME/.local/bin
+- mono --version
+- dotnet --info
+
 script:
-  - ./build.sh --version=$PROJECT_BUILD_VERSION --configuration=RELEASE --pack
+- ./build.sh --version=$PROJECT_BUILD_VERSION --configuration=RELEASE --pack
 
 after_success:
-  - if [ ! -z "$TRAVIS_TAG" ] && semver $TRAVIS_TAG &>/dev/null; then ./scripts/push-to-nuget.sh --apikey=$NUGET_API_KEY --version=$PROJECT_BUILD_VERSION; fi
+ - if [ ! -z "$TRAVIS_TAG" ] && semver $TRAVIS_TAG &>/dev/null; then ./scripts/push-to-nuget.sh --apikey=$NUGET_API_KEY --version=$PROJECT_BUILD_VERSION; fi
