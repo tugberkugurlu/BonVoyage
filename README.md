@@ -9,7 +9,8 @@ Foursquare .NET Client that you will fall in love with  ❤️
 Here is the simple usage of the API for userless access:
 
 ```csharp
-var userlessSettings = new UserlessAccessSettings("FOURSQUARE-CLIENT-ID", "FOURSQUARE-CLIENT-SECRET");
+var userlessSettings = new UserlessAccessSettings("CLIENT-ID", "CLIENT-SECRET");
+
 using (var bonVoyageContext = new BonVoyageContext())
 using (var foursquareContext = bonVoyageContext.CreateUserlessFoursquareContext(userlessSettings))
 {
