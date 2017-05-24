@@ -55,6 +55,7 @@ do
             testDirectoryName=$(dirname "${projectFilePath}")
             echo "starting to test $testDirectoryName for configration $CONFIGURATION"
             (cd $testDirectoryName && dotnet xunit -configuration $CONFIGURATION) || exit 1
+            cd $scriptsDir
         else
             echo "$projectFilePath is not testable, skipping"
         fi
