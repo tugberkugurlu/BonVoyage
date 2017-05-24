@@ -55,7 +55,6 @@ do
             testDirectoryName=$(dirname "${projectFilePath}")
             echo "starting to test $testDirectoryName for configration $CONFIGURATION"
             (cd $testDirectoryName && dotnet xunit -configuration $CONFIGURATION) || exit 1
-            cd $scriptsDir
         else
             echo "$projectFilePath is not testable, skipping"
         fi
@@ -69,5 +68,5 @@ then
     echo "Pack is disabled. Skipping pack for the solution"
 else
     echo "starting to pack for $scriptsDir"
-    dotnet pack $projectDirectory --configuration $CONFIGURATION --no-build || exit 1
+    dotnet pack --configuration $CONFIGURATION --no-build || exit 1
 fi
