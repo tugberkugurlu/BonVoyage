@@ -68,5 +68,5 @@ then
     echo "Pack is disabled. Skipping pack for the solution"
 else
     echo "starting to pack for $scriptsDir"
-    dotnet pack --configuration $CONFIGURATION --no-build || exit 1
+    dotnet pack --configuration $CONFIGURATION --version-suffix '' /property:VersionPrefix=$BUILDVERSION --no-build || exit 1
 fi
