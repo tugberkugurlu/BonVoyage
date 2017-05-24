@@ -22,18 +22,25 @@ namespace Playground
             {
                 var categories = foursquareContext.Categories.Get().Result;
 
-                PrintCategory(categories);
+                PrintCategory(categories, 0);
             }
         }
 
-        private static void PrintCategory(IReadOnlyCollection<VenueCategory> categories)
+        private static void PrintCategory(IReadOnlyCollection<VenueCategory> categories, int indentCount)
         {
             if (categories.Any())
             {
                 foreach (var venueCategory in categories)
                 {
-                    Console.WriteLine("{0}: {1}", venueCategory.Id, venueCategory.Name);
-                    PrintCategory(new ReadOnlyCollection<VenueCategory>(venueCategory.Categories.ToList()));
+                    for (int i = 0; i < indentCount; i++)
+                    {
+                        Console.Write("\t");
+                    }
+
+                    Console.Write("{0}: {1}", venueCategory.Id, venueCategory.Name);
+                    Console.Write(Environment.NewLine);
+
+                    PrintCategory(new ReadOnlyCollection<VenueCategory>(venueCategory.Categories.ToList()), indentCount + 1);
                 }
             }
         }
