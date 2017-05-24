@@ -6,7 +6,7 @@
     <RepositoryType>git</RepositoryType>
     <Description>Foursquare .NET Client that you will fall in love with</Description>
     <PackageTags>foursquare;swarm</PackageTags>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
