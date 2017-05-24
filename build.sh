@@ -62,3 +62,11 @@ do
         echo "There are $numberOfCsprojFiles csproj file(s) for $projectFilePath, skipping testing that"
     fi
 done
+
+if [ -z ${PACK+x} ]
+then
+    echo "Pack is disabled. Skipping pack for the solution"
+else
+    echo "starting to pack for $scriptsDir"
+    dotnet pack $projectDirectory --configuration $CONFIGURATION --no-build || exit 1
+fi
