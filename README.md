@@ -1,6 +1,6 @@
 # BonVoyage [![Build Status](https://travis-ci.org/tugberkugurlu/BonVoyage.svg?branch=master)](https://travis-ci.org/tugberkugurlu/BonVoyage)
 
-Foursquare .NET Client that you will fall in love with  ❤️
+Foursquare .NET Client that you will fall in love with :heart: This library supports [.NET Standard 1.1](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard1.1.md).
 
 ## API Usage
 
