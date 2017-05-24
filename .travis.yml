@@ -30,4 +30,4 @@ script:
 - ./build.sh --version=$PROJECT_BUILD_VERSION --configuration=RELEASE --pack
 
 after_success:
- - if [ ! -z "$TRAVIS_TAG" ] && semver $TRAVIS_TAG &>/dev/null; then ./scripts/push-to-nuget.sh --apikey=$NUGET_API_KEY --packagePath=./src/BonVoyage/bin/Release/BonVoyage.$PROJECT_BUILD_VERSION.nupkg --version=$PROJECT_BUILD_VERSION; fi
+ - if [ ! -z "$TRAVIS_TAG" ] && semver $TRAVIS_TAG &>/dev/null; then ./scripts/push-to-nuget.sh --apikey=$NUGET_API_KEY --packagePath=./src/BonVoyage/bin/RELEASE/BonVoyage.$PROJECT_BUILD_VERSION.nupkg --version=$PROJECT_BUILD_VERSION; fi
