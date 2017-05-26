@@ -53,5 +53,22 @@ namespace BonVoyage.Clients
                 return new ReadOnlyCollection<CompactVenue>(categories.ToList());
             }
         }
+
+        public async Task<IEnumerable<VenuePhoto>> GetPhotos(string venueId, int limit, int offset)
+        {
+            if (venueId == null) throw new ArgumentNullException(nameof(venueId));
+            if (offset < 1) throw new ArgumentOutOfRangeException(nameof(offset), offset, "Cannot be lower than 1");
+            if (limit < 1) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be lower than 1");
+            if (limit > 200) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be greater than 200");
+
+            using (var response = await HttpClient.GetAsync($"v2/venues/{venueId}/photos?limit={limit.ToString(CultureInfo.InvariantCulture)}&offset={offset.ToString(CultureInfo.InvariantCulture)}").ConfigureAwait(false))
+            {
+                var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
+                var categories = JsonConvert.DeserializeObject<IEnumerable<VenuePhoto>>(jObject["response"]["photos"]["items"].ToString());
+
+                return new ReadOnlyCollection<VenuePhoto>(categories.ToList());
+            }
+        }
     }
 }
