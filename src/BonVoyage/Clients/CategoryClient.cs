@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace BonVoyage.Clients
             if (limit < 1) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be lower than 1");
             if (limit > 50) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be greater than 50");
 
-            using (var response = await HttpClient.GetAsync($"v2/venues/search?near={placeName}&categoryId={categoryId}").ConfigureAwait(false))
+            using (var response = await HttpClient.GetAsync($"v2/venues/search?near={placeName}&categoryId={categoryId}&limit={limit.ToString(CultureInfo.InvariantCulture)}").ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
@@ -97,6 +98,17 @@ namespace BonVoyage.Clients
         {
             using (var response = await HttpClient.GetAsync("v2/venues/categories").ConfigureAwait(false))
             {
+                var content = await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    response.EnsureSuccessStatusCode();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(content, e);
+                }
+
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
                 var categories = JsonConvert.DeserializeObject<IEnumerable<VenueCategory>>(jObject["response"]["categories"].ToString());
