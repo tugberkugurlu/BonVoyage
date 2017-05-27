@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BonVoyage.Infrastructure;
 using BonVoyage.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,7 +51,7 @@ namespace BonVoyage.Clients
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
                 var venues = JsonConvert.DeserializeObject<IEnumerable<CompactVenue>>(jObject["response"]["venues"].ToString());
 
-                return new ReadOnlyCollection<CompactVenue>(venues.ToList());
+                return new ReadOnlyCollection<CompactVenue>(venues.SelectWithHttpClient(HttpClient).ToList());
             }
         }
     }
