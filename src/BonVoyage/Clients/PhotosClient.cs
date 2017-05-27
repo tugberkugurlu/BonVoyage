@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace BonVoyage.Clients
         /// <summary>
         /// Returns photos for a venue.
         /// </summary>
-        /// <param name="venueId">The venue you want photos for.</param>
+        /// <param name="venueId">The id of the venue you want photos for.</param>
         /// <param name="limit">Number of results to return, up to 200.</param>
         /// <param name="offset">Used to page through results.</param>
         /// <returns>A list of venue photos. <seealso href="https://developer.foursquare.com/docs/responses/photo" /></returns>
