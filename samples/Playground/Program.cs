@@ -21,8 +21,13 @@ namespace Playground
             using (var foursquareContext = bonVoyageContext.CreateUserlessFoursquareContext(new UserlessAccessSettings(clientId, clientSecret)))
             {
                 var categories = foursquareContext.Categories.Get().Result;
-
                 PrintCategory(categories, 0);
+
+                var photos = foursquareContext.Venues.GetPhotos("4b2e914bf964a520a3e224e3", 100, 0).Result;
+                foreach (var photo in photos)
+                {
+                    Console.WriteLine("{0}: {1}", photo.GetUrl(), photo.Visibility);
+                }
             }
         }
 
