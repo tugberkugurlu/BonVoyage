@@ -29,8 +29,8 @@ namespace Playground
                 var categories = await foursquareContext.Categories.Get();
                 PrintCategory(categories, 0);
 
-                var categoryId = categories.First().Id;
-                var venues = await foursquareContext.Venues.Search("San Fransisco, CA", categoryId, 1);
+                var category = categories.First();
+                var venues = await category.SearchVenues("San Fransisco, CA", 1);
 
                 var venue = venues.First();
                 var photos = await venue.GetPhotos();
