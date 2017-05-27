@@ -48,9 +48,9 @@ namespace BonVoyage.Clients
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-                var categories = JsonConvert.DeserializeObject<IEnumerable<CompactVenue>>(jObject["response"]["venues"].ToString());
+                var venues = JsonConvert.DeserializeObject<IEnumerable<CompactVenue>>(jObject["response"]["venues"].ToString());
 
-                return new ReadOnlyCollection<CompactVenue>(categories.ToList());
+                return new ReadOnlyCollection<CompactVenue>(venues.ToList());
             }
         }
     }
