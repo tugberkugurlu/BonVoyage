@@ -37,5 +37,10 @@ namespace BonVoyage.Clients
         /// "friends" (only the poster's friends can see), or "private" (only the poster can see)
         /// </summary>
         public PhotoVisibility Visibility { get; set; }
+
+        public string GetUrl()
+        {
+            return base.GetUrl(Height, Width);
+        }
     }
 }
