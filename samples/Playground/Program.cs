@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using BonVoyage;
 using BonVoyage.Models;
 
@@ -17,17 +18,22 @@ namespace Playground
             Console.WriteLine("ClientSecret:");
             var clientSecret = Console.ReadLine();
 
+            Run(clientId, clientSecret).Wait();
+        }
+
+        private static async Task Run(string clientId, string clientSecret)
+        {
             using (var bonVoyageContext = new BonVoyageContext())
             using (var foursquareContext = bonVoyageContext.CreateUserlessFoursquareContext(new UserlessAccessSettings(clientId, clientSecret)))
             {
-                var categories = foursquareContext.Categories.Get().Result;
+                var categories = await foursquareContext.Categories.Get();
                 PrintCategory(categories, 0);
 
                 var categoryId = categories.First().Id;
-                var venues = foursquareContext.Venues.Search("San Fransisco, CA", categoryId, 1).Result;
+                var venues = await foursquareContext.Venues.Search("San Fransisco, CA", categoryId, 1);
 
-                var venueId = venues.First().Id;
-                var photos = foursquareContext.Photos.GetVenuePhotos(venueId, 50, 0).Result;
+                var venue = venues.First();
+                var photos = await venue.GetPhotos();
                 foreach (var photo in photos)
                 {
                     Console.WriteLine("{0}: {1}", photo.GetUrl(), photo.Visibility);
