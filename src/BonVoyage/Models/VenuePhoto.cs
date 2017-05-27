@@ -1,6 +1,4 @@
-﻿using BonVoyage.Models;
-
-namespace BonVoyage.Clients
+﻿namespace BonVoyage.Models
 {
     public class VenuePhoto : FoursquarePhoto
     {

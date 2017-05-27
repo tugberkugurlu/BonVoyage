@@ -1,4 +1,4 @@
-﻿namespace BonVoyage.Clients
+﻿namespace BonVoyage.Models
 {
     public class CompactCheckin
     {
