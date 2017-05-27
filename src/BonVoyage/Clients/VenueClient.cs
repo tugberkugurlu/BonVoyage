@@ -54,6 +54,15 @@ namespace BonVoyage.Clients
             }
         }
 
+        /// <summary>
+        /// Returns photos for a venue.
+        /// </summary>
+        /// <param name="venueId">The venue you want photos for.</param>
+        /// <param name="limit">Number of results to return, up to 200.</param>
+        /// <param name="offset">Used to page through results.</param>
+        /// <returns>A list of venue photos. <seealso href="https://developer.foursquare.com/docs/responses/photo" /></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public async Task<IEnumerable<VenuePhoto>> GetPhotos(string venueId, int limit, int offset)
         {
             if (venueId == null) throw new ArgumentNullException(nameof(venueId));
