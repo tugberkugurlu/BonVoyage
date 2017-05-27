@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -24,7 +24,7 @@ namespace BonVoyage.Clients
         /// The id of the category to limit results to. If specifying a top-level category, all sub-categories will also match the query.
         /// </param>
         /// <seealso href="https://developer.foursquare.com/docs/venues/search" />
-        public Task<IEnumerable<CompactVenue>> Search(string placeName, string categoryId)
+        public Task<IReadOnlyCollection<CompactVenue>> Search(string placeName, string categoryId)
         {
             return Search(placeName, categoryId, 50);
         }
@@ -37,7 +37,7 @@ namespace BonVoyage.Clients
         /// </param>
         /// <param name="limit">The number of search results. Min: 1, Max: 50</param>
         /// <seealso href="https://developer.foursquare.com/docs/venues/search" />
-        public async Task<IEnumerable<CompactVenue>> Search(string placeName, string categoryId, int limit)
+        public async Task<IReadOnlyCollection<CompactVenue>> Search(string placeName, string categoryId, int limit)
         {
             if (placeName == null) throw new ArgumentNullException(nameof(placeName));
             if (categoryId == null) throw new ArgumentNullException(nameof(categoryId));

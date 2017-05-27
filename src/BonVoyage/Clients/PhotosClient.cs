@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace BonVoyage.Clients
         /// <returns>A list of venue photos. <seealso href="https://developer.foursquare.com/docs/responses/photo" /></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public async Task<IEnumerable<VenuePhoto>> GetVenuePhotos(string venueId, int limit, int offset)
+        public async Task<IReadOnlyCollection<VenuePhoto>> GetVenuePhotos(string venueId, int limit, int offset)
         {
             if (venueId == null) throw new ArgumentNullException(nameof(venueId));
             if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset), offset, "Cannot be lower than 0");
