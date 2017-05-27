@@ -28,10 +28,12 @@ namespace BonVoyage
 
             Categories = new CategoriesClient(_httpClient);
             Venues = new VenuesClient(_httpClient);
+            Photos = new PhotosClient(_httpClient);
         }
 
         public CategoriesClient Categories { get; }
         public VenuesClient Venues { get; }
+        public PhotosClient Photos { get; }
 
         public void Dispose()
         {

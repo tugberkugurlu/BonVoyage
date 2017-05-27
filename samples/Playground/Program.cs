@@ -23,7 +23,11 @@ namespace Playground
                 var categories = foursquareContext.Categories.Get().Result;
                 PrintCategory(categories, 0);
 
-                var photos = foursquareContext.Venues.GetPhotos("4b2e914bf964a520a3e224e3", 100, 0).Result;
+                var categoryId = categories.First().Id;
+                var venues = foursquareContext.Venues.Search("San Fransisco, CA", categoryId, 1).Result;
+
+                var venueId = venues.First().Id;
+                var photos = foursquareContext.Photos.GetVenuePhotos(venueId, 50, 0).Result;
                 foreach (var photo in photos)
                 {
                     Console.WriteLine("{0}: {1}", photo.GetUrl(), photo.Visibility);
