@@ -8,7 +8,7 @@ BonVoyage Foursquare .NET Client is [available on NuGet](https://www.nuget.org/p
 
 ## API Usage
 
-One of the great things about BonVoyage is its semantic API. Each resource you get a handle of (e.g. Category, Venue) will expose its aspects (e.g. Photos) and actions (e.g. Like, Dislike). You can find quick peek into the API of the library below.
+One of the great things about BonVoyage is its semantic API. Each resource you get a handle of (e.g. Category, Venue) will expose its aspects (e.g. Photos) and actions (e.g. Like, Dislike). You can have a glimpse of the API of the library below.
 
 ### Userless Access
 
