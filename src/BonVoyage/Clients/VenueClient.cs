@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BonVoyage.Infrastructure;
 using BonVoyage.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -70,7 +71,8 @@ namespace BonVoyage.Clients
             if (limit < 1) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be lower than 1");
             if (limit > 200) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be greater than 200");
 
-            using (var response = await HttpClient.GetAsync($"v2/venues/{venueId}/photos?limit={limit.ToString(CultureInfo.InvariantCulture)}&offset={offset.ToString(CultureInfo.InvariantCulture)}").ConfigureAwait(false))
+            var url = $"v2/venues/{venueId}/photos?limit={limit.ToStringInvariant()}&offset={offset.ToStringInvariant()}";
+            using (var response = await HttpClient.GetAsync(url).ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
