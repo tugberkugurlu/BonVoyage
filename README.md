@@ -8,9 +8,11 @@ BonVoyage Foursquare .NET Client is [available on NuGet](https://www.nuget.org/p
 
 ## API Usage
 
+One of the great things about BonVoyage is its semantic API. Each resource you get a handle of (e.g. Category, Venue) will expose its aspects (e.g. Photos) and actions (e.g. Like, Dislike). You can find quick peek into the API of the library below.
+
 ### Userless Access
 
-Here is the simple usage of the API for userless access:
+The simple usage of the API for userless access:
 
 ```csharp
 var userlessSettings = new UserlessAccessSettings("CLIENT-ID", "CLIENT-SECRET");
@@ -18,10 +20,25 @@ var userlessSettings = new UserlessAccessSettings("CLIENT-ID", "CLIENT-SECRET");
 using (var bonVoyageContext = new BonVoyageContext())
 using (var foursquareContext = bonVoyageContext.CreateUserlessFoursquareContext(userlessSettings))
 {
+    // Get and itirate over top level categories
     var categories = await foursquareContext.Categories.Get();
     foreach (var venueCategory in categories)
     {
         Console.WriteLine("{0}: {1}", venueCategory.Id, venueCategory.Name);
+
+        // Let's now get venues in San Fransisco for each category
+        var venues = await venueCategory.SearchVenues("San Fransisco, CA", 10);
+        foreach (var venue in venues)
+        {
+            Console.WriteLine("\t{0}: {1}", venue.Id, venue.Name);
+
+            // Finally, get the photos of each venue
+            var photos = await venue.GetPhotos();
+            foreach (var photo in photos)
+            {
+                Console.WriteLine("{0}: {1}", photo.GetUrl(), photo.Visibility);
+            }
+        }
     }
 }
 ```
