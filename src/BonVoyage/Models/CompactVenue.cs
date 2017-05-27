@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace BonVoyage.Models
 {
     /// <seealso href="https://developer.foursquare.com/docs/responses/venue" />
-    public class CompactVenue
+    public class CompactVenue : ConnectedResource
     {
         public string Id { get; set; }
         public string Name { get; set; }
