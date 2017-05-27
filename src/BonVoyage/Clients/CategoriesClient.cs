@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BonVoyage.Infrastructure;
 using BonVoyage.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -35,7 +36,7 @@ namespace BonVoyage.Clients
                 var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
                 var categories = JsonConvert.DeserializeObject<IEnumerable<VenueCategory>>(jObject["response"]["categories"].ToString());
 
-                return new ReadOnlyCollection<VenueCategory>(categories.ToList());
+                return new ReadOnlyCollection<VenueCategory>(categories.SelectWithHttpClient(HttpClient).ToList());
             }
         }
     }

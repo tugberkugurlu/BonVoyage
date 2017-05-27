@@ -2,7 +2,7 @@
 
 namespace BonVoyage.Models
 {
-    public class VenueCategory
+    public class VenueCategory : ConnectedResource
     {
         public string Id { get; set; }
         public string Name { get; set; }
