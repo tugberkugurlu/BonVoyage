@@ -10,9 +10,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
 {
-    public class CategoryClient : BaseClient
+    public class CategoriesClient : BaseClient
     {
-        public CategoryClient(HttpClient httpClient) : base(httpClient)
+        public CategoriesClient(HttpClient httpClient) : base(httpClient)
         {
         }
 

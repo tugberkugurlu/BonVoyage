@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
 {
-    public class CheckinClient : BaseClient
+    public class CheckinsClient : BaseClient
     {
-        public CheckinClient(HttpClient httpClient) : base(httpClient)
+        public CheckinsClient(HttpClient httpClient) : base(httpClient)
         {
         }
 

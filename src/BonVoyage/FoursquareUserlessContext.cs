@@ -26,12 +26,12 @@ namespace BonVoyage
                 BaseAddress = new Uri(Constants.FoursquareApiBaseUrl)
             };
 
-            Categories = new CategoryClient(_httpClient);
-            Venues = new VenueClient(_httpClient);
+            Categories = new CategoriesClient(_httpClient);
+            Venues = new VenuesClient(_httpClient);
         }
 
-        public CategoryClient Categories { get; }
-        public VenueClient Venues { get; }
+        public CategoriesClient Categories { get; }
+        public VenuesClient Venues { get; }
 
         public void Dispose()
         {
