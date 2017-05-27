@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -57,7 +57,7 @@ namespace BonVoyage.Clients
         public async Task<IEnumerable<VenuePhoto>> GetPhotos(string venueId, int limit, int offset)
         {
             if (venueId == null) throw new ArgumentNullException(nameof(venueId));
-            if (offset < 1) throw new ArgumentOutOfRangeException(nameof(offset), offset, "Cannot be lower than 1");
+            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset), offset, "Cannot be lower than 0");
             if (limit < 1) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be lower than 1");
             if (limit > 200) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be greater than 200");
 
