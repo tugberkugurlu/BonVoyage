@@ -1,9 +1,15 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace BonVoyage.Models
 {
     public abstract class ConnectedResource
     {
-        internal HttpClient HttpClient { get; set; }
+        protected ConnectedResource(HttpClient httpClient)
+        {
+            HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        }
+        
+        internal HttpClient HttpClient { get; }
     }
 }

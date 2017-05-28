@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BonVoyage.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
@@ -20,8 +19,8 @@ namespace BonVoyage.Clients
             using (var response = await HttpClient.GetAsync("v2/users/self").ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-                var user = JsonConvert.DeserializeObject<CompactUser>(jObject["response"]["user"].ToString());
+                var jObject = DeserializeObject<JObject>(resultAsString);
+                var user = DeserializeObject<CompactUser>(jObject["response"]["user"].ToString());
 
                 return user;
             }

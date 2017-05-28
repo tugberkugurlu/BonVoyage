@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BonVoyage.Infrastructure;
 using BonVoyage.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
@@ -37,8 +36,8 @@ namespace BonVoyage.Clients
             using (var response = await HttpClient.GetAsync(url).ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-                var categories = JsonConvert.DeserializeObject<IEnumerable<VenuePhoto>>(jObject["response"]["photos"]["items"].ToString());
+                var jObject = DeserializeObject<JObject>(resultAsString);
+                var categories = DeserializeObject<IEnumerable<VenuePhoto>>(jObject["response"]["photos"]["items"].ToString());
 
                 return new ReadOnlyCollection<VenuePhoto>(categories.ToList());
             }

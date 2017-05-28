@@ -32,11 +32,14 @@ namespace BonVoyage.Clients
                     throw new Exception(content, e);
                 }
 
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new ConnectedResourceConverter(HttpClient));
+                
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-                var categories = JsonConvert.DeserializeObject<IEnumerable<VenueCategory>>(jObject["response"]["categories"].ToString());
+                var jObject = DeserializeObject<JObject>(resultAsString);
+                var categories = DeserializeObject<IEnumerable<VenueCategory>>(jObject["response"]["categories"].ToString());
 
-                return new ReadOnlyCollection<VenueCategory>(categories.SelectWithHttpClient(HttpClient).ToList());
+                return new ReadOnlyCollection<VenueCategory>(categories.ToList());
             }
         }
     }

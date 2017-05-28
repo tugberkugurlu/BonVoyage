@@ -5,9 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BonVoyage.Infrastructure;
 using BonVoyage.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BonVoyage.Clients
@@ -44,14 +42,14 @@ namespace BonVoyage.Clients
             if (categoryId == null) throw new ArgumentNullException(nameof(categoryId));
             if (limit < 1) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be lower than 1");
             if (limit > 50) throw new ArgumentOutOfRangeException(nameof(limit), limit, "Cannot be greater than 50");
-
+            
             using (var response = await HttpClient.GetAsync($"v2/venues/search?near={placeName}&categoryId={categoryId}&limit={limit.ToString(CultureInfo.InvariantCulture)}").ConfigureAwait(false))
             {
                 var resultAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var jObject = JsonConvert.DeserializeObject<JObject>(resultAsString);
-                var venues = JsonConvert.DeserializeObject<IEnumerable<CompactVenue>>(jObject["response"]["venues"].ToString());
+                var jObject = DeserializeObject<JObject>(resultAsString);
+                var venues = DeserializeObject<IEnumerable<CompactVenue>>(jObject["response"]["venues"].ToString());
 
-                return new ReadOnlyCollection<CompactVenue>(venues.SelectWithHttpClient(HttpClient).ToList());
+                return new ReadOnlyCollection<CompactVenue>(venues.ToList());
             }
         }
     }

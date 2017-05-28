@@ -29,10 +29,11 @@ namespace Playground
                 var categories = await foursquareContext.Categories.Get();
                 PrintCategory(categories, 0);
 
-                var category = categories.First();
+                var category = categories.First().Categories.First();
                 var venues = await category.SearchVenues("San Fransisco, CA", 1);
-
                 var venue = venues.First();
+                Console.WriteLine("{0}: {1} (for {2})", venue.Id, venue.Name, category.Name);
+
                 var photos = await venue.GetPhotos();
                 foreach (var photo in photos)
                 {
