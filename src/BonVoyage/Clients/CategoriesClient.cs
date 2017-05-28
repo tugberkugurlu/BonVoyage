@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
@@ -21,17 +20,6 @@ namespace BonVoyage.Clients
         {
             using (var response = await HttpClient.GetAsync("v2/venues/categories").ConfigureAwait(false))
             {
-                var content = await response.Content.ReadAsStringAsync();
-
-                try
-                {
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(content, e);
-                }
-
                 var settings = new JsonSerializerSettings();
                 settings.Converters.Add(new ConnectedResourceConverter(HttpClient));
                 
