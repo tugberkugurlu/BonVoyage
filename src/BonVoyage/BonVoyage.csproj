@@ -2,6 +2,8 @@
   <Import Project="../../version.props" />
   <PropertyGroup>
     <Product>BonVoyage</Product>
+    <PackageProjectUrl>https://github.com/tugberkugurlu/BonVoyage</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/tugberkugurlu/BonVoyage/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/tugberkugurlu/BonVoyage</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Description>Foursquare .NET Client that you will fall in love with</Description>
