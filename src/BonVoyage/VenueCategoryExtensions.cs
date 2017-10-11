@@ -25,5 +25,14 @@ namespace BonVoyage
             var client = new VenuesClient(category.HttpClient);
             return client.Search(placeName, category.Id, limit);
         }
+
+        public static Task<IReadOnlyCollection<CompactVenue>> SearchVenues(this VenueCategory category,
+            Location location, int limit)
+        {
+            if (category == null) throw new ArgumentNullException(nameof(category));
+
+            var client = new VenuesClient(category.HttpClient);
+            return client.Search(location, category.Id, limit);
+        }
     }
 }
