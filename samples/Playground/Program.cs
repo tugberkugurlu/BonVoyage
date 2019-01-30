@@ -30,7 +30,8 @@ namespace Playground
                 PrintCategory(categories, 0);
 
                 var category = categories.First().Categories.First();
-                var venues = await category.SearchVenues("San Fransisco, CA", 1);
+                //var venues = await category.SearchVenues("San Fransisco, CA", 1);
+                var venues = await category.SearchVenues(new Location() { Lat = 53.551085, Lng = 9.993682 }, 50);
                 var venue = venues.First();
                 Console.WriteLine("{0}: {1} (for {2})", venue.Id, venue.Name, category.Name);
 

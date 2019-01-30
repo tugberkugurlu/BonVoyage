@@ -8,9 +8,9 @@
     <RepositoryType>git</RepositoryType>
     <Description>Foursquare .NET Client that you will fall in love with</Description>
     <PackageTags>foursquare;swarm</PackageTags>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 </Project>
