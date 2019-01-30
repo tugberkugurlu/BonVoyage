@@ -12,13 +12,41 @@ namespace Playground
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("ClientId:");
-            var clientId = Console.ReadLine();
+            Console.WriteLine("Userless?");
+            var userless = bool.Parse(Console.ReadLine());
 
-            Console.WriteLine("ClientSecret:");
-            var clientSecret = Console.ReadLine();
+            if (userless) 
+            {
+                Console.WriteLine("ClientId:");
+                var clientId = Console.ReadLine();
 
-            Run(clientId, clientSecret).Wait();
+                Console.WriteLine("ClientSecret:");
+                var clientSecret = Console.ReadLine();
+
+                Run(clientId, clientSecret).Wait();
+            }
+            else 
+            {
+                Console.WriteLine("Access Token:");
+                var accessToken = Console.ReadLine();
+
+                Run(accessToken).Wait();
+            }
+        }
+
+        private static async Task Run(string accessToken)
+        {
+            using (var bonVoyageContext = new BonVoyageContext())
+            using (var foursquareContext = bonVoyageContext.CreateFoursquareContext(accessToken))
+            {
+                var visitedVenues = await foursquareContext.Users.GetVisitedVenues();
+                foreach (var visitedVenue in visitedVenues)
+                {
+                    Console.WriteLine("{0}: ({1}, {2})", visitedVenue.Name, 
+                        visitedVenue.Location.City, 
+                        visitedVenue.Location.Country);
+                }
+            }
         }
 
         private static async Task Run(string clientId, string clientSecret)
