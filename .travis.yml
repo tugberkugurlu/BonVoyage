@@ -21,7 +21,6 @@ before_script:
 - chmod u+x ./scripts/push-to-nuget.sh
 - eval $(./scripts/set-build-version.sh)
 - export PATH=$PATH:$HOME/.local/bin
-- mono --version
 - dotnet --info
 
 script:
